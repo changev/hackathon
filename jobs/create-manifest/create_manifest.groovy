@@ -7,14 +7,14 @@ node{
         "BINTRAY_SUBJECT=${env.BINTRAY_SUBJECT}",
         "BINTRAY_REPO=binary"]){
         deleteDir()
-        dir("on-build-config"){
+        dir("hackathon"){
             checkout scm
         }
         withCredentials([
-            usernamePassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b', 
-            passwordVariable: 'BINTRAY_API_KEY', 
-            usernameVariable: 'BINTRAY_USERNAME')
-            ]){
+            usernamePassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b',
+                             passwordVariable: 'BINTRAY_API_KEY',
+                             usernameVariable: 'BINTRAY_USERNAME')
+        ]){
             sh './hackathon/jobs/create_manifest/create_manifest.sh'
         }
         // inject properties file as environment variables
@@ -30,4 +30,3 @@ node{
         }
     }
 }
-
